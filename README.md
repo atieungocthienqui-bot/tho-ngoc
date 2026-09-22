@@ -14,7 +14,7 @@
 > **Note**: v0.1.0 is an early working prototype. Breaking changes are expected.
 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/7c6fc6a2-4c41-43d6-a70b-adc0f53540e5" alt="Thỏ Ngọc CLI Screenshot" />
+  <img src="assets/cli.png" alt="Thỏ Ngọc CLI Screenshot" />
 </div>
 
 **Your terminal has a voice.**
