@@ -35,20 +35,21 @@ Thỏ Ngọc **không phải** là một dịch vụ web bán giọng đọc AI,
 - **Rust** (`rustup.rs` kèm C++ Build Tools trên Windows)
 - **Python 3.11+**
 
-### Cài đặt tự động (1-Click trên Windows)
+### Cài đặt tự động (Automated Windows installer script)
 Clone repository và chạy file `install.bat`:
 ```cmd
-git clone https://github.com/YOUR_USERNAME/tho-ngoc.git
+git clone https://github.com/atieungocthienqui-bot/tho-ngoc.git
 cd tho-ngoc
 install.bat
 ```
-*(Script sẽ tự động cài đặt `piper-tts`, tải model tiếng Việt `vi_VN-vais1000-medium` 63MB và cài lệnh `thongoc` vào toàn hệ thống).*
+*(Script dùng thử nguyên mẫu: Tự động cài đặt `piper-tts`, tải model tiếng Việt 63MB và build lệnh `thongoc` qua cargo).*
 
 ---
 
 ## 🛠️ Hướng dẫn sử dụng (Usage)
 
 ### 1. Kiểm tra hệ thống ("Hang Thỏ")
+*(Hiện tại chỉ hiển thị giả lập mockup prototype)*
 ```bash
 thongoc doctor
 ```
@@ -75,7 +76,7 @@ thongoc init "video-lich-su-01"
 # Render toàn bộ các đoạn thoại trong segments.json ra thư mục audio/
 thongoc render
 
-# Chạy lại: Hệ thống tự động bỏ qua (Smart Cache) các đoạn chưa bị chỉnh sửa!
+# Bỏ qua các đoạn đã render nếu file âm thanh đầu ra vẫn tồn tại.
 # Dùng --force nếu muốn ép render lại toàn bộ:
 thongoc render --force
 ```
@@ -102,8 +103,10 @@ Bạn có thể dạy Thỏ Ngọc cách phát âm bất kỳ từ chuyên ngàn
 
 ## 🏗️ Kiến trúc hệ thống
 
+*(Lưu ý: TUI bằng ratatui hiện đang nằm trên Roadmap/Planned cho v0.2.0, lệnh `studio` hiện tại là placeholder)*
+
 ```text
-          Rust CLI (clap) + TUI (ratatui)
+          Rust CLI (clap) + TUI (ratatui - planned)
                         │
                   Engine Manager
                         │

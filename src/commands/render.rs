@@ -7,6 +7,7 @@ use colored::*;
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Segment {
     pub id: String,
+    pub character: Option<String>,
     pub text: String,
     #[serde(default = "default_status")]
     pub status: String,
@@ -62,15 +63,20 @@ pub async fn execute(force: bool) {
         println!("[RENDER] [{}] \"{}\" -> {}", seg.id.cyan(), seg.text, target_file.yellow());
 
         let bridge_script = if Path::new("python_bridge/synthesize.py").exists() {
-            "python_bridge/synthesize.py"
+            "python_bridge/synthesize.py".to_string()
+        } else if let Ok(val) = std::env::var("THONGOC_PYTHON_BRIDGE") {
+            val
         } else {
-            r"C:\Users\Admin\.gemini\antigravity\scratch\tho-ngoc\python_bridge\synthesize.py"
+            eprintln!("\n{} Cannot find python_bridge/synthesize.py.", "Error:".red().bold());
+            eprintln!("Please run this command from the Thỏ Ngọc repository root,");
+            eprintln!("or set the THONGOC_PYTHON_BRIDGE environment variable.");
+            return;
         };
 
         let status = Command::new("python")
             .env("PYTHONIOENCODING", "utf-8")
             .args([
-                bridge_script,
+                &bridge_script,
                 "--text", &seg.text,
                 "--output", &target_file,
             ])

@@ -5,15 +5,16 @@ pub async fn execute() {
     println!("      ( •_•)     Project Thỏ Ngọc");
     println!("     / >🎙️      Checking your burrow...\n");
 
-    // Mock system check
-    println!("{:<15} {:<25} {}", "CPU", "Detected", "✓".green());
-    println!("{:<15} {:<25} {}", "RAM", "16 GB", "✓".green());
-    println!("{:<15} {:<25} {}", "GPU", "Detected", "✓".green());
-    println!("{:<15} {:<25} {}", "Python Bridge", "3.12", "✓".green());
+    println!("{}\n", "[Not Implemented - Prototype Checks Only]".bright_black());
+
+    println!("{:<15} {:<25} {}", "CPU", "Simulated", "✓".green());
+    println!("{:<15} {:<25} {}", "RAM", "Simulated", "✓".green());
+    println!("{:<15} {:<25} {}", "GPU", "Simulated", "✓".green());
+    println!("{:<15} {:<25} {}", "Python Bridge", "Simulated", "✓".green());
 
     println!("\nEngines");
-    println!("{:<30} {}", "Piper", "✓".green());
-    println!("{:<30} {}", "Kokoro", "✓".green());
+    println!("{:<30} {}", "Piper", "Simulated".green());
+    println!("{:<30} {}", "Kokoro", "Simulated".green());
     println!("{:<30} {}", "ZeroTTS", "Not installed".bright_black());
 
     println!("\nRecommended configuration:");
