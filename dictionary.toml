@@ -1,0 +1,9 @@
+[pronunciation.exact]
+"ESP32" = "E S P ba hai"
+"AI" = "ây ai"
+"Thỏ Ngọc" = "Thỏ Ngọc"
+
+[pronunciation.regex]
+"(?i)(\\d+)\\s?km/h" = "\\1 ki lô mét trên giờ"
+"(\\d+)[\\.,](\\d+)\\s?triệu" = "\\1 phẩy \\2 triệu"
+"\\b(\\d{1,2})/(\\d{1,2})/(\\d{4})\\b" = "ngày \\1 tháng \\2 năm \\3"

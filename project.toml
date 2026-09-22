@@ -1,0 +1,9 @@
+[project]
+name = "tap-1-lich-su"
+version = "0.1.0"
+language = "vi"
+
+[defaults]
+engine = "piper"
+voice = "vi_VN-vais1000-medium"
+speed = 1.0

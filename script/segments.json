@@ -1,0 +1,14 @@
+[
+  {
+    "id": "001",
+    "text": "Chào mừng bạn đến với Project Thỏ Ngọc.",
+    "status": "generated",
+    "audio_file": "audio/001.wav"
+  },
+  {
+    "id": "002",
+    "text": "Đây là bàn làm việc tạo giọng nói cục bộ dành cho mọi người.",
+    "status": "generated",
+    "audio_file": "audio/002.wav"
+  }
+]

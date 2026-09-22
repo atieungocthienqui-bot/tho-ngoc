@@ -1,0 +1,28 @@
+# Rust build artifacts
+/target/
+**/*.rs.bk
+Cargo.lock
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+
+# Large TTS Models (downloaded automatically via install.bat / setup)
+models/**/*.onnx
+models/**/*.bin
+models/**/*.pt
+
+# Generated Audio & Temp test files
+*.wav
+*.mp3
+audio/*.wav
+sample.txt
+
+# OS & IDE files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
