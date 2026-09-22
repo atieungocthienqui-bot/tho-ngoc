@@ -13,6 +13,10 @@
 
 > **Note**: v0.1.0 is an early working prototype. Breaking changes are expected.
 
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/7c6fc6a2-4c41-43d6-a70b-adc0f53540a5" alt="Thỏ Ngọc CLI Screenshot" />
+</div>
+
 **Your terminal has a voice.**
 
 **Thỏ Ngọc (Moon Rabbit TTS)** là một bàn làm việc âm thanh (TTS Workbench) mã nguồn mở, chạy 100% cục bộ trên máy tính cá nhân và hoạt động trực tiếp trong Terminal.
