@@ -11,20 +11,22 @@
 ![Python](https://img.shields.io/badge/Bridge-Python_3.11+-blue)
 ![License](https://img.shields.io/badge/license-MIT-brightgreen)
 
+> **Note**: v0.1.0 is an early working prototype. Breaking changes are expected.
+
 **Your terminal has a voice.**
 
 **Thỏ Ngọc (Moon Rabbit TTS)** là một bàn làm việc âm thanh (TTS Workbench) mã nguồn mở, chạy 100% cục bộ trên máy tính cá nhân và hoạt động trực tiếp trong Terminal.
 
-Thỏ Ngọc **không phải** là một dịch vụ web bán giọng đọc AI, mà là một **bộ công cụ dựng nháp âm thanh (Toolchain)** dành cho YouTuber, Content Creator, Indie Game Developer và người dùng yêu thích dòng lệnh — những người cần tạo hàng trăm bản nháp kịch bản mà không lo đốt tiền credit.
+Thỏ Ngọc **không phải** là một dịch vụ web bán giọng đọc AI, mà là một **bộ công cụ dòng lệnh âm thanh (Toolchain)** dành cho YouTuber, Content Creator, Indie Game Developer và người dùng yêu thích dòng lệnh — những người cần tạo hàng trăm bản nháp kịch bản mà không lo đứt tiền credit.
 
 ---
 
-## 🐇 Triết lý thiết kế (Core Philosophy)
+## 💡 Triết lý thiết kế (Core Philosophy)
 
 - **Bring Your Own Computer (BYOC):** Không tài khoản, không cloud, không giới hạn ký tự. Bạn có thể tạo 2 bản nháp hoặc 200 bản nháp hoàn toàn miễn phí bằng chính CPU của mình.
 - **Vietnamese Text Intelligence:** Lớp chuẩn hóa văn bản tiếng Việt mã nguồn mở. Tự động dịch ngày tháng (`12/09/2026`), đơn vị đo (`15 km/h`), tiền tệ, số lớn (`1550400`) và từ viết tắt (`AI`, `ESP32`) thông qua từ điển tùy chỉnh `dictionary.toml`.
 - **Git-trackable Audio Projects:** Mọi dự án đều lưu dưới dạng file văn bản thuần (`project.toml`, `dictionary.toml`, `script/segments.json`). Dễ dàng quản lý phiên bản kịch bản và phát âm bằng Git.
-- **🪶 Potato Mode:** Tối ưu hóa cho máy tính cấu hình phổ thông, chạy mượt trên CPU với các model siêu nhẹ như Piper ONNX.
+- **🥔 Potato Mode:** Tối ưu hóa cho máy tính cấu hình phổ thông, chạy mượt trên CPU với các model siêu nhẹ như Piper ONNX.
 - **Unix Pipeline Ready:** Hỗ trợ truyền văn bản qua Pipe (`|`), đọc từ file `.txt`, tự động phát loa (`--play`) và kết hợp dễ dàng với `ffmpeg`.
 
 ---
@@ -49,7 +51,6 @@ install.bat
 ## 🛠️ Hướng dẫn sử dụng (Usage)
 
 ### 1. Kiểm tra hệ thống ("Hang Thỏ")
-*(Hiện tại chỉ hiển thị giả lập mockup prototype)*
 ```bash
 thongoc doctor
 ```
