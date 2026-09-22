@@ -18,6 +18,27 @@ fn default_status() -> String {
     "ready".to_string()
 }
 
+#[derive(serde::Deserialize, Debug)]
+struct ProjectConfig {
+    defaults: DefaultsConfig,
+}
+
+#[derive(serde::Deserialize, Debug)]
+struct DefaultsConfig {
+    #[allow(dead_code)]
+    engine: String,
+    voice: String,
+}
+
+fn get_project_voice() -> Option<String> {
+    if let Ok(content) = fs::read_to_string("project.toml") {
+        if let Ok(config) = toml::from_str::<ProjectConfig>(&content) {
+            return Some(config.defaults.voice);
+        }
+    }
+    None
+}
+
 pub async fn execute(force: bool) {
     let script_path = Path::new("script/segments.json");
     if !script_path.exists() {
@@ -64,23 +85,26 @@ pub async fn execute(force: bool) {
 
         let bridge_script = if Path::new("python_bridge/synthesize.py").exists() {
             "python_bridge/synthesize.py".to_string()
-        } else if let Ok(val) = std::env::var("THONGOC_PYTHON_BRIDGE") {
-            val
+        } else if let Ok(val) = std::env::var("THONGOC_HOME") {
+            format!("{}/python_bridge/synthesize.py", val)
         } else {
             eprintln!("\n{} Cannot find python_bridge/synthesize.py.", "Error:".red().bold());
             eprintln!("Please run this command from the Thỏ Ngọc repository root,");
-            eprintln!("or set the THONGOC_PYTHON_BRIDGE environment variable.");
+            eprintln!("or set the THONGOC_HOME environment variable.");
             return;
         };
 
-        let status = Command::new("python")
-            .env("PYTHONIOENCODING", "utf-8")
-            .args([
-                &bridge_script,
-                "--text", &seg.text,
-                "--output", &target_file,
-            ])
-            .status();
+        let mut cmd = Command::new("python");
+        cmd.env("PYTHONIOENCODING", "utf-8");
+        cmd.arg(&bridge_script);
+        cmd.arg("--text").arg(&seg.text);
+        cmd.arg("--output").arg(&target_file);
+        
+        if let Some(v) = get_project_voice() {
+            cmd.arg("--model").arg(v);
+        }
+
+        let status = cmd.status();
 
         match status {
             Ok(s) if s.success() => {

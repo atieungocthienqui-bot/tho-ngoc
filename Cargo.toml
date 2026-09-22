@@ -10,3 +10,5 @@ tokio = { version = "1.32", features = ["full", "rt-multi-thread"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 colored = "2.0" # Để in màu cho lệnh doctor
+toml = "1.1.6"
+sysinfo = "0.39.6"

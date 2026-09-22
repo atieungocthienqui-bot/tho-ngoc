@@ -3,10 +3,15 @@ use std::path::Path;
 use colored::*;
 
 pub async fn execute(name: Option<&str>) {
+    if Path::new("project.toml").exists() {
+        eprintln!("{} Thư mục này đã có project.toml. Vui lòng chạy lệnh ở thư mục trống hoặc xóa file cũ.", "Lỗi:".red().bold());
+        return;
+    }
+
     let proj_name = name.unwrap_or("my-speech-project");
     println!("\n      (\\_/)");
     println!("      ( •_•)     Project Thỏ Ngọc");
-    println!("     / >📁      Initializing new project: {}\n", proj_name.cyan());
+    println!("     / >🎙️      Initializing new project: {}\n", proj_name.cyan());
 
     // Tạo các thư mục dự án
     let dirs = vec!["script", "audio"];

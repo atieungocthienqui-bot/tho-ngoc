@@ -30,6 +30,8 @@ copy /Y target\release\tho-ngoc.exe "%USERPROFILE%\.cargo\bin\thongoc.exe" > nul
 
 echo.
 echo [✓] Cài đặt hoàn tất 100%%!
-echo [👉] Bạn có thể mở CMD bất kỳ và gõ: thongoc doctor
+echo Thiết lập biến môi trường THONGOC_HOME...
+setx THONGOC_HOME "%CD%" > nul
+echo [💡] Bạn có thể mở CMD bất kỳ và gõ: thongoc doctor
 echo.
 pause

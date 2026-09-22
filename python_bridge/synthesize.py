@@ -15,12 +15,18 @@ from normalizer import load_dictionary, normalize_text
 def synthesize(text: str, output_wav: str, voice_model: str = None):
     project_dir = Path(__file__).parent.parent
     
-    # 1. Đường dẫn file dictionary và model
-    dict_path = project_dir / "dictionary.toml"
+    # 1. Đường dẫn file dictionary (Ưu tiên thư mục hiện tại của project)
+    dict_path = Path.cwd() / "dictionary.toml"
+    if not dict_path.exists():
+        dict_path = project_dir / "dictionary.toml"
+
     if voice_model is None:
         voice_model = project_dir / "models" / "piper" / "vi_VN-vais1000-medium.onnx"
     else:
         voice_model = Path(voice_model)
+        # Nếu chỉ truyền tên voice (VD: vi_VN-vais1000-medium) thay vì đường dẫn tuyệt đối
+        if not voice_model.exists() and not "/" in str(voice_model) and not "\\" in str(voice_model):
+            voice_model = project_dir / "models" / "piper" / f"{voice_model.name}.onnx"
 
     if not voice_model.exists():
         print(f"[Lỗi] Không tìm thấy model tại {voice_model}")
