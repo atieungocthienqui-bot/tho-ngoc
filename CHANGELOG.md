@@ -4,6 +4,12 @@ Tất cả những thay đổi nổi bật của dự án này sẽ được ghi
 
 Dự án tuân thủ [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.3] - 2026-09-25
+
+### Fixed
+- Fixed duplicate engine check in `speak` command
+- Fixed terminal output encoding issues (mojibake) and restored proper Vietnamese characters and emojis in `speak.rs`
+
 ## [0.1.2] - Tightening the Burrow 🐇
 
 ### Fixed
