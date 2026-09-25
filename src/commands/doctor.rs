@@ -42,6 +42,24 @@ pub async fn execute() {
         println!("{:<15} {:<25} {}", "Python Bridge", "Not found", "✗".red());
     }
 
+    println!("\nThỏ Ngọc Environment");
+    let home_dir = std::env::var("THONGOC_HOME").unwrap_or_else(|_| "Not Set".to_string());
+    println!("{:<20} {}", "THONGOC_HOME", 
+        if home_dir == "Not Set" { "Not Set ✗".red() } else { format!("{} ✓", home_dir).green() }
+    );
+
+    let bridge_path = format!("{}\\python_bridge\\synthesize.py", home_dir);
+    let bridge_exists = std::path::Path::new(&bridge_path).exists();
+    println!("{:<20} {}", "Python Script", 
+        if bridge_exists { "Found ✓".green() } else { "Missing ✗".red() }
+    );
+
+    let model_path = format!("{}\\models\\piper\\vi_VN-vais1000-medium.onnx", home_dir);
+    let model_exists = std::path::Path::new(&model_path).exists();
+    println!("{:<20} {}", "Default Model", 
+        if model_exists { "Found ✓".green() } else { "Missing ✗".red() }
+    );
+
     println!("\nEngines");
     if piper_ok {
         println!("{:<30} {}", "Piper", "✓".green());

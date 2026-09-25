@@ -6,12 +6,12 @@
      / >🎙️      Local-first TTS Workbench for your Terminal
 ```
 
-![Version](https://img.shields.io/badge/version-0.1.0-green)
+![Version](https://img.shields.io/badge/version-0.1.1-green)
 ![Rust](https://img.shields.io/badge/CLI-Rust-orange)
 ![Python](https://img.shields.io/badge/Bridge-Python_3.11+-blue)
 ![License](https://img.shields.io/badge/license-MIT-brightgreen)
 
-> **Note**: v0.1.0 is an early working prototype. Breaking changes are expected.
+> **Note**: v0.1.1 is an early working prototype. Breaking changes are expected.
 
 <div align="center">
   <img src="assets/cli.png" alt="Thỏ Ngọc CLI Screenshot" />
