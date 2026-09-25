@@ -35,7 +35,7 @@ Thỏ Ngọc **không phải** là một dịch vụ web bán giọng đọc AI,
 
 ---
 
-## 🚀 Cài đặt nhanh (Quick Install - v0.1.0)
+## 🚀 Cài đặt nhanh (Quick Install)
 
 ### Yêu cầu
 - **Rust** (`rustup.rs` kèm C++ Build Tools trên Windows)

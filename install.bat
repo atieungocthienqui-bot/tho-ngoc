@@ -24,6 +24,13 @@ if errorlevel 1 (
 echo [1/3] Đang cài đặt thư viện Python Bridge (piper-tts)...
 python -m pip install piper-tts --quiet
 
+if errorlevel 1 (
+    echo [!] Không thể cài đặt piper-tts.
+    echo Vui lòng kiểm tra Python, pip và kết nối mạng.
+    pause
+    exit /b 1
+)
+
 if not exist "models\piper\vi_VN-vais1000-medium.onnx" (
     echo [2/3] Đang tải Model Tiếng Việt (vi_VN-vais1000-medium - 63MB)...
     mkdir "models\piper" 2>nul
@@ -34,6 +41,14 @@ if not exist "models\piper\vi_VN-vais1000-medium.onnx" (
 
 if not exist "models\piper\vi_VN-vais1000-medium.onnx" (
     echo [!] Lỗi tải model. Vui lòng kiểm tra lại kết nối mạng.
+    pause
+    exit /b 1
+)
+
+if not exist "models\piper\vi_VN-vais1000-medium.onnx.json" (
+    echo [!] Thiếu file cấu hình model (.onnx.json).
+    pause
+    exit /b 1
 )
 
 echo [3/3] Đang biên dịch Thỏ Ngọc CLI (Rust Release)...

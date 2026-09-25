@@ -44,18 +44,29 @@ pub async fn execute() {
 
     println!("\nThỏ Ngọc Environment");
     let home_dir = std::env::var("THONGOC_HOME").unwrap_or_else(|_| "Not Set".to_string());
+    
+    let home_valid = home_dir != "Not Set" && std::path::Path::new(&home_dir).exists();
+    
     println!("{:<20} {}", "THONGOC_HOME", 
-        if home_dir == "Not Set" { "Not Set ✗".red() } else { format!("{} ✓", home_dir).green() }
+        if home_dir == "Not Set" { 
+            "Not Set ✗".red() 
+        } else if !home_valid {
+            format!("{} (Invalid Path) ✗", home_dir).red()
+        } else { 
+            format!("{} ✓", home_dir).green() 
+        }
     );
 
-    let bridge_path = format!("{}\\python_bridge\\synthesize.py", home_dir);
-    let bridge_exists = std::path::Path::new(&bridge_path).exists();
+    let home = std::path::PathBuf::from(&home_dir);
+    
+    let bridge_path = home.join("python_bridge").join("synthesize.py");
+    let bridge_exists = bridge_path.exists();
     println!("{:<20} {}", "Python Script", 
         if bridge_exists { "Found ✓".green() } else { "Missing ✗".red() }
     );
 
-    let model_path = format!("{}\\models\\piper\\vi_VN-vais1000-medium.onnx", home_dir);
-    let model_exists = std::path::Path::new(&model_path).exists();
+    let model_path = home.join("models").join("piper").join("vi_VN-vais1000-medium.onnx");
+    let model_exists = model_path.exists();
     println!("{:<20} {}", "Default Model", 
         if model_exists { "Found ✓".green() } else { "Missing ✗".red() }
     );
@@ -73,8 +84,14 @@ pub async fn execute() {
     println!("{:<20} Piper", "Vietnamese Fast");
 
     if ram_gb < 8 {
-        println!("\nPotato Mode         {} 🥔 (RAM < 8GB detected)", "Auto-enabled".yellow());
+        println!(
+            "\nPotato Mode         {} 🥔",
+            "Recommended (RAM < 8GB detected)".yellow()
+        );
     } else {
-        println!("\nPotato Mode         {} 🥔", "Available".green());
+        println!(
+            "\nPotato Mode         {} 🥔",
+            "Available".green()
+        );
     }
 }
