@@ -1,4 +1,4 @@
-use std::fs;
+﻿use std::fs;
 use std::io::{self, Read};
 use std::path::Path;
 use std::process::Command;
@@ -33,15 +33,25 @@ pub async fn execute(
     play: bool,
 ) {
     let engine_name = engine.unwrap_or("piper");
+    if engine_name != "piper" {
+        eprintln!("{} Engine '{}' is not supported yet.", "Error:".red().bold(), engine_name);
+        eprintln!("Currently supported: piper");
+        return;
+    }
+    if engine_name != "piper" {
+        eprintln!("{} Engine '{}' is not supported yet.", "Error:".red().bold(), engine_name);
+        eprintln!("Currently supported: piper");
+        return;
+    }
     let output_file = output.unwrap_or("narration.wav");
 
-    // 1. Xác định nội dung cần đọc: Từ file, từ Pipe/Stdin, hay từ chuỗi trực tiếp
+    // 1. XÃ¡c Ä‘á»‹nh ná»™i dung cáº§n Ä‘á»c: Tá»« file, tá»« Pipe/Stdin, hay tá»« chuá»—i trá»±c tiáº¿p
     let content = match text_arg {
         Some("-") | None => {
-            // Đọc từ Stdin (Unix Pipe: echo "..." | thongoc speak)
+            // Äá»c tá»« Stdin (Unix Pipe: echo "..." | thongoc speak)
             let mut buffer = String::new();
             if let Err(e) = io::stdin().read_to_string(&mut buffer) {
-                eprintln!("❌ Lỗi khi đọc từ đường ống Pipe: {}", e);
+                eprintln!("âŒ Lá»—i khi Ä‘á»c tá»« Ä‘Æ°á»ng á»‘ng Pipe: {}", e);
                 return;
             }
             buffer.trim().to_string()
@@ -49,32 +59,32 @@ pub async fn execute(
         Some(val) => {
             let path = Path::new(val);
             if path.is_file() {
-                // Đọc từ file kịch bản (thongoc speak script.txt)
+                // Äá»c tá»« file ká»‹ch báº£n (thongoc speak script.txt)
                 match fs::read_to_string(path) {
                     Ok(data) => {
-                        println!("📄 Đã đọc nội dung từ file: {}", val.cyan());
+                        println!("ðŸ“„ ÄÃ£ Ä‘á»c ná»™i dung tá»« file: {}", val.cyan());
                         data.trim().to_string()
                     }
                     Err(e) => {
-                        eprintln!("❌ Không thể đọc file '{}': {}", val, e);
+                        eprintln!("âŒ KhÃ´ng thá»ƒ Ä‘á»c file '{}': {}", val, e);
                         return;
                     }
                 }
             } else {
-                // Nhập trực tiếp chuỗi text
+                // Nháº­p trá»±c tiáº¿p chuá»—i text
                 val.to_string()
             }
         }
     };
 
     if content.is_empty() {
-        eprintln!("⚠️  Văn bản rỗng! Vui lòng nhập nội dung hoặc truyền file.");
+        eprintln!("âš ï¸  VÄƒn báº£n rá»—ng! Vui lÃ²ng nháº­p ná»™i dung hoáº·c truyá»n file.");
         return;
     }
 
     println!("\n      (\\_/)");
-    println!("      ( •_•)     Project Thỏ Ngọc");
-    println!("     / >🎙️      Synthesizing speech...\n");
+    println!("      ( â€¢_â€¢)     Project Thá» Ngá»c");
+    println!("     / >ðŸŽ™ï¸      Synthesizing speech...\n");
 
     let preview = if content.chars().count() > 60 {
         format!("{}...", content.chars().take(60).collect::<String>())
@@ -82,25 +92,25 @@ pub async fn execute(
         content.clone()
     };
 
-    println!("{:<12}: \"{}\"", "Văn bản", preview);
+    println!("{:<12}: \"{}\"", "VÄƒn báº£n", preview);
     println!("{:<12}: {}", "Engine", engine_name.green());
-    println!("{:<12}: {}\n", "File xuất", output_file.cyan());
+    println!("{:<12}: {}\n", "File xuáº¥t", output_file.cyan());
 
-    // 2. Gọi Python Bridge (Tự động tìm đường dẫn kể cả khi đứng ở ổ đĩa khác)
-    let bridge_script = if Path::new("python_bridge/synthesize.py").exists() {
-        "python_bridge/synthesize.py".to_string()
+    // 2. Gá»i Python Bridge (Tá»± Ä‘á»™ng tÃ¬m Ä‘Æ°á»ng dáº«n ká»ƒ cáº£ khi Ä‘á»©ng á»Ÿ á»• Ä‘Ä©a khÃ¡c)
+    let bridge_path = if Path::new("python_bridge").join("synthesize.py").exists() {
+        std::path::PathBuf::from("python_bridge").join("synthesize.py")
     } else if let Ok(val) = std::env::var("THONGOC_HOME") {
-        format!("{}/python_bridge/synthesize.py", val)
+        std::path::PathBuf::from(val).join("python_bridge").join("synthesize.py")
     } else {
         eprintln!("\n{} Cannot find python_bridge/synthesize.py.", "Error:".red().bold());
-        eprintln!("Please run this command from the Thỏ Ngọc repository root,");
+        eprintln!("Please run this command from the Thá» Ngá»c repository root,");
         eprintln!("or set the THONGOC_HOME environment variable.");
         return;
     };
 
     let mut cmd = Command::new("python");
     cmd.env("PYTHONIOENCODING", "utf-8");
-    cmd.arg(&bridge_script);
+    cmd.arg(bridge_path);
     cmd.arg("--text").arg(&content);
     cmd.arg("--output").arg(output_file);
     
@@ -114,11 +124,12 @@ pub async fn execute(
 
     match status {
         Ok(s) if s.success() => {
-            println!("\n✨ {} Đã xuất file: '{}'", "Hoàn thành!".green(), output_file.bold());
+            println!("\nâœ¨ {} ÄÃ£ xuáº¥t file: '{}'", "HoÃ n thÃ nh!".green(), output_file.bold());
 
-            // 3. Tự động phát âm thanh nếu có cờ --play
+            // 3. Tá»± Ä‘á»™ng phÃ¡t Ã¢m thanh náº¿u cÃ³ cá» --play
             if play {
-                println!("🔊 Đang phát âm thanh...");
+                if cfg!(target_os = "windows") {
+                    println!("ðŸ”Š Äang phÃ¡t Ã¢m thanh...");
                 let _ = Command::new("powershell")
                     .args([
                         "-NoProfile",
@@ -126,13 +137,17 @@ pub async fn execute(
                         &format!("(New-Object Media.SoundPlayer '{}').PlaySync()", output_file),
                     ])
                     .status();
+                } else {
+                    println!("⚠️ --play is currently supported on Windows only.");
+                }
             }
         }
         Ok(s) => {
-            eprintln!("\n❌ {} (Exit code: {:?})", "Quá trình sinh âm thanh thất bại".red(), s.code());
+            eprintln!("\nâŒ {} (Exit code: {:?})", "QuÃ¡ trÃ¬nh sinh Ã¢m thanh tháº¥t báº¡i".red(), s.code());
         }
         Err(e) => {
-            eprintln!("\n❌ Không thể gọi Python Bridge: {}", e);
+            eprintln!("\nâŒ KhÃ´ng thá»ƒ gá»i Python Bridge: {}", e);
         }
     }
 }
+

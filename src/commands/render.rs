@@ -74,7 +74,7 @@ pub async fn execute(force: bool) {
         let target_file = seg.audio_file.clone().unwrap_or_else(|| format!("audio/{}.wav", seg.id));
         let file_exists = Path::new(&target_file).exists();
 
-        // Nếu đã generate rồi và không dùng cờ --force thì bỏ qua (Cache thông minh!)
+        // Bỏ qua các đoạn đã sinh (Skip existing outputs)
         if !force && seg.status == "generated" && file_exists {
             println!("[BỎ QUA] [{}] File đã tồn tại: {}", seg.id.bold(), target_file.bright_black());
             skipped_count += 1;
@@ -83,10 +83,10 @@ pub async fn execute(force: bool) {
 
         println!("[RENDER] [{}] \"{}\" -> {}", seg.id.cyan(), seg.text, target_file.yellow());
 
-        let bridge_script = if Path::new("python_bridge/synthesize.py").exists() {
-            "python_bridge/synthesize.py".to_string()
+        let bridge_path = if Path::new("python_bridge").join("synthesize.py").exists() {
+            std::path::PathBuf::from("python_bridge").join("synthesize.py")
         } else if let Ok(val) = std::env::var("THONGOC_HOME") {
-            format!("{}/python_bridge/synthesize.py", val)
+            std::path::PathBuf::from(val).join("python_bridge").join("synthesize.py")
         } else {
             eprintln!("\n{} Cannot find python_bridge/synthesize.py.", "Error:".red().bold());
             eprintln!("Please run this command from the Thỏ Ngọc repository root,");
@@ -96,7 +96,7 @@ pub async fn execute(force: bool) {
 
         let mut cmd = Command::new("python");
         cmd.env("PYTHONIOENCODING", "utf-8");
-        cmd.arg(&bridge_script);
+        cmd.arg(bridge_path);
         cmd.arg("--text").arg(&seg.text);
         cmd.arg("--output").arg(&target_file);
         
