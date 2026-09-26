@@ -30,8 +30,10 @@ Thỏ Ngọc **không phải** là một dịch vụ web bán giọng đọc AI,
 - **Bring Your Own Computer (BYOC):** Không tài khoản, không cloud, không giới hạn ký tự. Bạn có thể tạo 2 bản nháp hoặc 200 bản nháp hoàn toàn miễn phí bằng chính CPU của mình.
 - **Vietnamese Text Intelligence:** Lớp chuẩn hóa văn bản tiếng Việt mã nguồn mở. Tự động dịch ngày tháng (`12/09/2026`), đơn vị đo (`15 km/h`), tiền tệ, số lớn (`1550400`) và từ viết tắt (`AI`, `ESP32`) thông qua từ điển tùy chỉnh `dictionary.toml`.
 - **Git-trackable Audio Projects:** Mọi dự án đều lưu dưới dạng file văn bản thuần (`project.toml`, `dictionary.toml`, `script/segments.json`). Dễ dàng quản lý phiên bản kịch bản và phát âm bằng Git.
-- **🥔 Potato Mode:** Tối ưu hóa cho máy tính cấu hình phổ thông, chạy mượt trên CPU với các model siêu nhẹ như Piper ONNX.
-- **Unix Pipeline Ready:** Hỗ trợ truyền văn bản qua Pipe (`|`), đọc từ file `.txt`, tự động phát loa (`--play`) và kết hợp dễ dàng với `ffmpeg`.
+- **🥔 Potato Mode (planned):** Thỏ Ngọc hướng tới khả năng hoạt động tốt
+  trên máy cấu hình phổ thông với các model nhẹ như Piper ONNX.
+  Hiện tại `thongoc doctor` có thể phát hiện hệ thống ít RAM và
+  đưa ra khuyến nghị cấu hình.
 
 ---
 

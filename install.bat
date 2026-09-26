@@ -2,7 +2,7 @@
 chcp 65001 > nul
 echo.
 echo       (\_/)
-echo       ( •_•)     Project Thỏ Ngọc v0.1.1 - Installer
+echo       ( •_•)     Project Thỏ Ngọc - Installer
 echo      / ^>🎙️      Local-first TTS Workbench
 echo.
 
